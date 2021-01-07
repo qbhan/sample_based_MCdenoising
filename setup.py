@@ -40,7 +40,10 @@ def main():
 
     with open(os.path.join(dirname, "sbmc", "version.py")) as fid:
         try:
-            __version__, = re.findall( '__version__ = "(.*)"', fid.read() )
+            # a = fid.read()
+            # print(a)
+            # __version__, = re.findall( '__version__ = "(.*)"', fid.read() )
+            __version__ = "0.0.1"
         except:
             raise ValueError("could not find version number")
 
@@ -100,8 +103,8 @@ def main():
         version=__version__,
         packages=packages,
         ext_modules=[extension],
-        install_requires=["torch-tools==0.0.36", "bridson", "pandas", "pyexr",
-                          "scikit-image", "lz4", "wget", "torch==1.2.0"],
+        install_requires=["imageio", "torch-tools==0.0.36", "bridson", "pandas==0.24.2", "pyexr", "cython", "scipy==1.4.0",
+                          "scikit-image==0.14.2", "lz4", "wget", "torch==1.2.0"],
         cmdclass=dict(build_ext=hlpt.HalideBuildExtension),
     )
 
