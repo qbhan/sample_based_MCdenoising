@@ -90,7 +90,8 @@ RUN cd 2016_bitterli_nfor && mkdir build && cd build && cmake .. && make -j 4
 
 
 # Install Halide
-RUN wget -O halide.tgz https://github.com/halide/Halide/releases/download/release_2019_08_27/halide-linux-64-gcc53-800-65c26cba6a3eca2d08a0bccf113ca28746012cc3.tgz
+# RUN wget -O halide.tgz https://github.com/halide/Halide/releases/download/release_2019_08_27/halide-linux-64-gcc53-800-65c26cba6a3eca2d08a0bccf113ca28746012cc3.tgz
+Run wget -O halide.tgz https://github.com/halide/Halide/releases/download/v8.0.0/halide-linux-64-gcc53-800-65c26cba6a3eca2d08a0bccf113ca28746012cc3.tgz
 RUN tar zvxf halide.tgz
 RUN rm -rf halide.tgz
 ENV HALIDE_DISTRIB_DIR /sbmc_app/halide
@@ -105,9 +106,13 @@ RUN curl -o /sbmc_app/anaconda.sh -O \
 ENV PATH /sbmc_app/anaconda/bin:$PATH
 
 RUN source activate
+# RUN source activate sbmc
+# added
+RUN conda install python=3.6
 RUN conda install pytorch==1.2.0 torchvision==0.4.0 cudatoolkit=10.0 -c pytorch  
 # RUN conda install pytorch torchvision cudatoolkit=9.2 -c pytorch  
 RUN pip install --upgrade pip && pip install pytest
+RUN pip install numpy
 # -----------------------------------------------------------------------------
 
 # Set the environment variables so that the `demo/*` commands in the Makefile
